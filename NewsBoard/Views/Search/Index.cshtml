@@ -1,0 +1,43 @@
+﻿@using NewsBoard.Model
+@using NewsBoard.Utils
+@model NewsBoard.Web.ViewModels.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="affix">
+                <div class="page-header"><h1><small>Search results for </small>@Model.Query</h1></div>
+                <h3>New Search</h3>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" name="q" class="form-control" value="@Model.Query" placeholder="Search">
+                    </div>
+                    <select name="ns" class="form-control form-group">
+                        <option>Fonte</option>
+                        @foreach (NewsSource ns in Model.NewsSources)
+                        {
+                            <option value="@ns.Id" >@ns.Name</option>
+                        }
+                    </select>
+                    <button class="btn btn-primary form-group" type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            @foreach (var partition in Model.Results.Partition(2))
+            {
+                <div class="row spacer">
+                    @foreach (NewsItem newsItem in partition)
+                    {
+                        <div class="col-md-6">
+                            @Html.DisplayFor(m => newsItem)
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

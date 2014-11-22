@@ -1,0 +1,126 @@
+﻿@using NewsBoard.Constants
+@using NewsBoard.Model
+@model NewsBoard.Web.ViewModels.AdminNewsViewModel
+
+@{
+    ViewBag.Title = "Manage News";
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <h3>@Model.Category News</h3>
+        @foreach (NewsItem newsItem in Model.News)
+        {
+            <div class="thumbnail news-items">
+                <div class="caption">
+                    <a href="@newsItem.Link"><h3>@newsItem.Title</h3></a>
+                    <p>@newsItem.Description</p>
+                </div>
+            </div>
+            <p></p>
+        }
+    </div>
+    <div class="col-lg-2">
+        <div class="affix">
+            <div class="row">
+                <h3>Category</h3>
+                <select class="form-control" id="categories" size="6">
+                    @foreach (String cat in Model.NewsCategories)
+                    {
+                        <option value="@cat">@cat</option>
+                    }
+                </select>
+            </div>
+            <div class="row spacer text-center">
+                <button id="categorize-btn" class="btn btn-primary">Categorize!</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="affix">
+            <div class="row" data-bind="visible: hasSelectedNewsItem">
+                <div class="row">
+                    <h3>NewsItem Keywords(<span data-bind="text: words().length"></span>)</h3>
+                    <input data-bind="value: newWord" type="text" placeholder="words" />
+                    <button data-bind="click: addWord" type="button" class="btn btn-default">Add</button>
+                </div>
+                <div class="row spacer">
+                    <select size="5" data-bind="options: words,  optionsText: $data, value: selectedWord, visible: words().length > 0"></select>
+                    <button data-bind="click: removeWord" type="button" class="btn btn-default">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="affix">
+            <div class="list-group spacer">
+                <a class="list-group-item" @(Model.Category == Constants.DEFAULTMANUALCATEGORY ? "active" : "") href="@Url.Action("News", new {category = ""})">@Constants.DEFAULTMANUALCATEGORY</a>
+                @foreach (string cat in Model.NewsCategories)
+                {
+                    <a class="list-group-item @(cat == Model.Category ? "active" : "")" href="@Url.Action("News", new {category = ""})/@cat">@cat</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/knockout-3.1.0.js")"></script>
+    <script>
+        function ViewModel() {
+            var self = this;
+            self.words = ko.observableArray();
+            self.newWord = "";
+            self.hasSelectedNewsItem = ko.observable(false);
+            self.selectedWord = ko.observable();
+            self.addWord = function() {
+                var splitWords = self.newWord.split(' ');
+                for (var i = 0; i < splitWords.length; ++i)
+                    self.words.push(splitWords[i]);
+            };
+
+            self.removeWord = function() {
+                self.words.remove(self.selectedWord());
+            };
+
+            self.reloadWords = function(valueSelected) {
+                $.getJSON('@Url.Action("GetTopWords")', { newsitemId: valueSelected })
+                    .done(function(data) {
+                        self.words(data);
+                    });
+            };
+
+        };
+
+        var viewModel = new ViewModel();
+        ko.applyBindings(viewModel);
+
+        //EVENTS
+
+        var selected = $(null);
+        var selectedId;
+
+        $('.news-items').click(function() {
+            selected.css('background-color', '');
+            $(this).css('background-color', '#00ff7f');
+            selected = $(this);
+            selectedId = $(this).find('a').attr('href');
+            viewModel.reloadWords(selectedId);
+            viewModel.hasSelectedNewsItem(true);
+        });
+
+        $('#categorize-btn').click(function() {
+
+            var selectedCategory = $('#categories option:selected');
+            if (!selectedId || selectedCategory.length === 0) return;
+            $.post('@Url.Action("Categorize")',
+            {
+                category: selectedCategory.val(),
+                newsitemId: selectedId,
+                topwords: viewModel.words().join(' ')
+            });
+            viewModel.hasSelectedNewsItem(false);
+            selected.remove();
+        });
+    </script>
+}

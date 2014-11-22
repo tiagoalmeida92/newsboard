@@ -1,0 +1,138 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Request a news source</h2>
+
+<div class="row spacer">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-inline text-center">
+            <label for="search" class="control-label">Search</label>
+            <input id="search" value="@Model" class="form-control" type="text" placeholder="e.g. newspapers, sites .." />
+            <button id="search-btn" class="btn btn-primary">Go</button>
+        </div>
+        <div class="spacer">
+            <div data-bind="foreach: newsSites">
+                <div class="spacer">
+                    <img data-bind="attr:{src: faviconLink}" />
+                    <a data-bind="html: title, attr:{href: link}"></a>
+                    <p data-bind="html: contentSnippet"></p>
+                    <button data-bind="click: $root.preview" class="btn btn-info">Preview News</button>
+                    <button data-bind="click: $root.request" class="btn btn-default">Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="affix">
+            <img src="@Url.Content("~/Content/img/powered-by-google-on-white.png")" />
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="feedsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Preview News</h4>
+            </div>
+            <div class="modal-body">
+                <ol data-bind ="foreach: currentFeed">
+                    <li>
+                        <a data-bind="text: title,attr:{href: link}"></a>
+                        <span class="label label-success" data-bind="date: publishedDate"></span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/knockout-3.1.0.js")"></script>
+    <script src="@Url.Content("~/Scripts/NewsBoard/ko-extensions.js")"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script>
+        var FAVICON_API = 'http://s2.googleusercontent.com/s2/favicons?domain=';
+
+        //VIEWMODEL
+        function NewsSite(entry) {
+            var self = this;
+            self.title = removeHtmlTags(entry.title);
+            self.link = entry.link;
+            self.url = entry.url;
+            self.faviconLink = FAVICON_API + entry.link;
+            self.contentSnippet = removeHtmlTags(entry.contentSnippet);
+        }
+
+        function SearchViewModel() {
+            var self = this;
+            self.newsSites = ko.observableArray([]);
+            self.currentFeed = ko.observableArray([]);
+            self.request = function(newsSite, event) {
+                $.ajax({
+                    url: '@Url.Action("Request", "RequestNewsSources")',
+                    type: 'POST',
+                    data: JSON.stringify({ Name: newsSite.title, Url: newsSite.link, RssUrl: newsSite.url }),
+                    dataType: 'text',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function() {
+                        var btn = $(event.target);
+                        btn.attr("class", "btn btn-success");
+                        btn.html('<span class="glyphicon glyphicon-ok"></span>');
+                        btn.attr('disabled', 'disabled');
+                    }
+                });
+            };
+
+            self.preview = function(newsSite) {
+                var feed = new google.feeds.Feed(newsSite.url);
+                feed.setNumEntries(20);
+                feed.load(function(result) {
+                    if (result.error) return;
+                    self.currentFeed(result.feed.entries);
+                    $('#feedsModal').modal();
+                });
+            };
+        }
+
+        var vm = new SearchViewModel();
+        ko.applyBindings(vm);
+
+        //GOOGLE API
+        google.load("feeds", "1");
+
+        function findDone(result) {
+            vm.newsSites.removeAll();
+            if (result.error) return;
+            for (var i = 0; i < result.entries.length; i++) {
+                var entry = result.entries[i];
+                vm.newsSites.push(new NewsSite(entry));
+            }
+        }
+
+        $('#search-btn').click(function() {
+            var query = $('#search').val();
+            google.feeds.findFeeds(query, findDone);
+        });
+
+        $("#search").keyup(function(event) {
+            if (event.keyCode == 13) {
+                $("#search-btn").click();
+            }
+        });
+
+        function removeHtmlTags(html) {
+            return html.replace(/<(?:.|\n)*?>/gm, '');
+        }
+
+        google.setOnLoadCallback(function() {
+            $("#search-btn").click();
+        });
+
+    </script>
+}

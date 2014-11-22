@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NewsBoard.Persistence</RootNamespace>
+    <AssemblyName>NewsBoard.Persistence</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migrations\201408131746274_Initial.cs" />
+    <Compile Include="Migrations\201408131746274_Initial.Designer.cs">
+      <DependentUpon>201408131746274_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408180840132_Azure.cs" />
+    <Compile Include="Migrations\201408180840132_Azure.Designer.cs">
+      <DependentUpon>201408180840132_Azure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408271605002_AddNewsSourceColumnDefaultImageUrl.cs" />
+    <Compile Include="Migrations\201408271605002_AddNewsSourceColumnDefaultImageUrl.Designer.cs">
+      <DependentUpon>201408271605002_AddNewsSourceColumnDefaultImageUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409041437307_RenameCategory.cs" />
+    <Compile Include="Migrations\201409041437307_RenameCategory.Designer.cs">
+      <DependentUpon>201409041437307_RenameCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409041449289_RenamesNewsItems.cs" />
+    <Compile Include="Migrations\201409041449289_RenamesNewsItems.Designer.cs">
+      <DependentUpon>201409041449289_RenamesNewsItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409081653182_AddedNewsSourceRequests.cs" />
+    <Compile Include="Migrations\201409081653182_AddedNewsSourceRequests.Designer.cs">
+      <DependentUpon>201409081653182_AddedNewsSourceRequests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409082136507_AddRssUrlNewsSourceRequest.cs" />
+    <Compile Include="Migrations\201409082136507_AddRssUrlNewsSourceRequest.Designer.cs">
+      <DependentUpon>201409082136507_AddRssUrlNewsSourceRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409082146569_RenameNewsSourceRequest.cs" />
+    <Compile Include="Migrations\201409082146569_RenameNewsSourceRequest.Designer.cs">
+      <DependentUpon>201409082146569_RenameNewsSourceRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="NewsDb.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewsBoard.Model\NewsBoard.Model.csproj">
+      <Project>{911a3b0e-4187-4a63-aba9-4a4b5d20a2e5}</Project>
+      <Name>NewsBoard.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201408131746274_Initial.resx">
+      <DependentUpon>201408131746274_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408180840132_Azure.resx">
+      <DependentUpon>201408180840132_Azure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408271605002_AddNewsSourceColumnDefaultImageUrl.resx">
+      <DependentUpon>201408271605002_AddNewsSourceColumnDefaultImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409041437307_RenameCategory.resx">
+      <DependentUpon>201409041437307_RenameCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409041449289_RenamesNewsItems.resx">
+      <DependentUpon>201409041449289_RenamesNewsItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409081653182_AddedNewsSourceRequests.resx">
+      <DependentUpon>201409081653182_AddedNewsSourceRequests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409082136507_AddRssUrlNewsSourceRequest.resx">
+      <DependentUpon>201409082136507_AddRssUrlNewsSourceRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409082146569_RenameNewsSourceRequest.resx">
+      <DependentUpon>201409082146569_RenameNewsSourceRequest.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

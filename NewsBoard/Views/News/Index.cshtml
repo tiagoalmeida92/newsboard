@@ -1,0 +1,260 @@
+﻿@using NewsBoard.Utils
+@using NewsBoard.Web.Controllers
+@using NewsBoard.Web.ViewModels
+@model NewsBoard.Web.ViewModels.NewsViewModel
+@{
+    ViewBag.Title = Model.Category ?? "News";
+}
+
+<div class="container">
+    <div class="row spacer">
+        <div class="col-md-2">
+            <div class="affix">
+                <div>
+                    <button id="filter-btn" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                </div>
+                <div class="list-group spacer">
+                    @foreach (string cat in Model.Categories)
+                    {
+                        <a class="list-group-item @(cat == Model.Category ? "active" : "")" href="@Url.Action("Index", new {category = ""})/@cat">@cat</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <!-- Nav tabs -->
+            @if (Model.HasFacebook)
+            {
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#default" role="tab" data-toggle="tab">Home</a></li>
+                    <li><a href="#facebook" role="tab" data-toggle="tab"><img width="20" height="20" src="http://img2.wikia.nocookie.net/__cb20140429004607/jamescameronstitanic/images/4/4a/Facebook_favicon.png" />Facebook</a></li>
+                </ul>
+            }
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="default">
+                    <div data-bind="foreach: rows">
+                        <div class="row" data-bind="foreach: $data">
+                            <div class="col-lg-4" data-bind="template: {name: 'newsitem-template'}"></div>
+                        </div>
+                    </div>
+                    <div class="row spacer">
+                        <div class="col-md-2 col-md-offset-5">
+                            <button id="state" data-bind="text: state" class="btn btn-primary btn-lg" disabled="disabled">Loading...</button>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.HasFacebook)
+                {
+                    <div class="tab-pane" id="facebook">
+                        @foreach (var posts in Model.FacebookPosts.Partition(3))
+                        {
+                            <div class="row">
+                                @foreach (FacebookPostsViewModel post in posts)
+                                {
+                                    <div class="col-md-4">
+                                        @Html.DisplayFor(m => post)
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@* FILTER MODAL *@
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Filter settings</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="filter-form" class="col-md-6">
+                        @foreach (NewsSourceViewModel newsource in @Model.NewsSources)
+                        {
+                            <p>
+                                <label>
+                                    <input name="@newsource.NewsSource.Id" type="checkbox" @(newsource.Ignored ? "" : "checked") />
+                                    <img width="20" height="20" src="@newsource.NewsSource.FaviconUrl">
+                                    @newsource.NewsSource.Name
+                                </label>
+                            </p>
+                        }
+                        <a href="@Url.Action("Index", "RequestNewsSources")" class="btn btn-success">Request a news source</a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="btn-group-vertical">
+                            <a class="btn btn-info" href="@Url.Action("Index", new {order = NewsController.Order.NewestFirst})">Mais recentes primeiro</a>
+                            <a class="btn btn-info" href="@Url.Action("Index", new {order = NewsController.Order.AToZ})">Ordem alfabética A - Z</a>
+                            <a class="btn btn-info" href="@Url.Action("Index", new {order = NewsController.Order.ZToA})">Ordem alfabética Z - A</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button id="filter-save" class="btn btn-primary">Save changes</button>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")" type="button" class="btn btn-primary">You need to be logged in!</a>
+                }
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+@* RELATED NEWS MODAL *@
+<div class="modal" id="relatedNewsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Notícias relacionadas</h4>
+            </div>
+            <div class="modal-body" data-bind="foreach: currentRelatedNews">
+                <div class="spacer thumbnail" data-bind="attr: { 'data-newsLink': NewsItem.Link }">
+                    <img class="img-rounded img-responsive" data-bind="visible: NewsItem.ImageLink != null, attr: { src: NewsItem.ImageLink }" />
+                    <div class="caption">
+                        <a data-bind="attr: { href: NewsItem.Link }"><h3 data-bind="text: NewsItem.Title"></h3></a>
+                        <p data-bind="desc: NewsItem.Description"></p>
+                        <a data-bind="attr: { href: NewsItem.NewsSource.SiteUrl}">
+                            <img width="20" height="20" data-bind="attr: { src: NewsItem.NewsSource.FaviconUrl }" />
+                        </a>
+                        <span class="label label-default" data-bind="date: NewsItem.PubDate"></span>
+                        <span class="label label-success"><span data-bind="text: Percentage">%</span></span>
+                        <button data-bind="click: $root.relatedNews" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/knockout-3.1.0.js")"></script>
+    <script src="@Url.Content("~/Scripts/NewsBoard/ko-extensions.js?v=2")"></script>
+    <script type="text/javascript">
+        var NEWS_URI = '@Html.Raw(@Model.OdataEndpoint)';
+        var CHUNK_SIZE = 30;
+        var loading = true;
+        var current = 0;
+
+        function NewsViewModel() {
+            var self = this;
+            self.news = ko.observableArray([]);
+            self.state = ko.observable('Loading...');
+
+            self.rows = ko.computed(function() {
+                var news = self.news();
+                var result = [];
+                for (var i = 0; i < news.length; i += 3) {
+                    var row = [];
+                    for (var j = 0; j < 3; ++j) {
+                        if (news[i + j]) {
+                            row.push(news[i + j]);
+                        }
+                    }
+                    result.push(row);
+                }
+                return result;
+            });
+
+            self.load = function() {
+                loading = true;
+                $.getJSON(NEWS_URI + '&$skip=' + current + '&$top=' + CHUNK_SIZE,
+                    function(data) {
+                        data = data.value;
+                        if (data.length < CHUNK_SIZE) {
+                            $(window).unbind("scroll");
+                            self.state('All news loaded');
+                        }
+                        self.news(self.news().concat(data));
+                        current += CHUNK_SIZE;
+                        loading = false;
+                    });
+            };
+
+            self.currentRelatedNews = ko.observableArray();
+
+            self.relatedNews = function (newsItem, event) {
+                var link = newsItem.Link || newsItem.NewsItem.Link;
+                $.getJSON('/api/RelatedNews/',
+                    { link: link },
+                    function(data) {
+                        if (data.length == 0) {
+                            $(event.target).attr('title', 'Sem relacionadas')
+                                .tooltip({
+                                    trigger: 'hover focus',
+                                    placement: 'bottom'
+                                });
+                            $(event.target).tooltip('show');
+                        } else {
+                            $('#relatedNewsModal').modal();
+                            self.currentRelatedNews(data);
+                        }
+                    });
+            };
+
+        }
+
+        var viewModel = new NewsViewModel();
+        ko.applyBindings(viewModel);
+        viewModel.load();
+
+        //EVENTS
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                if (loading) return;
+                viewModel.load();
+            }
+        });
+
+
+        $('#filter-save').click(function() {
+            var form = $('#filter-form input:checkbox:not(:checked)');
+            var ignored = [];
+            form.each(function(idx, elem) {
+                ignored.push(elem.name);
+            });
+            $.ajax({
+                url: '@Url.Action("UpdateIgnoredNewsSources", "Account")',
+                type: 'POST',
+                data: JSON.stringify(ignored),
+                dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+    
+    <script type="text/html" id="newsitem-template">
+        <div class="spacer thumbnail" data-bind="attr: { 'data-newsLink': Link }">
+            <img class="img-rounded img-responsive" data-bind="visible: ImageLink != null, attr: { src: ImageLink }" />
+            <div class="caption">
+                <a data-bind="attr: { href: Link }"><h3 data-bind="text: Title"></h3></a>
+                <p data-bind="desc: Description"></p>
+                <a data-bind="attr: { href: NewsSource.SiteUrl}">
+                    <img width="20" height="20" data-bind="attr: { src: NewsSource.FaviconUrl }" />
+                </a>
+                <span class="label label-default" data-bind="date: PubDate"></span>
+                <button data-bind="click: $root.relatedNews" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+        </div>
+    </script>
+}

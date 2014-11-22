@@ -1,0 +1,45 @@
+﻿@using NewsBoard.Model
+@model IEnumerable<NewsBoard.Model.NewsSourceRequest>
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Requested News Sources</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Requester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RssUrl)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (NewsSourceRequest item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Requester)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a href="@item.Url">@item.Url</a>
+            </td>
+            <td>
+                <a href="@item.RssUrl">@item.RssUrl</a>
+            </td>
+        </tr>
+    }
+
+</table>

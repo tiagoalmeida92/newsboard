@@ -1,0 +1,13 @@
+﻿@model NewsBoard.Model.NewsItem
+
+<div class="thumbnail">
+    <img width="300" height="200" class="img-rounded" src="@Model.ImageLink" />
+    <div class="caption">
+        <a href="@Model.Link"><h3>@Model.Title</h3></a>
+        <p>@Model.Description</p>
+        <a href="@Model.NewsSource.SiteUrl">
+            <img width="20" height="20" src="@Model.NewsSource.FaviconUrl" />
+        </a>
+        <span class="label label-default">@Model.PubDate</span>
+    </div>
+</div>

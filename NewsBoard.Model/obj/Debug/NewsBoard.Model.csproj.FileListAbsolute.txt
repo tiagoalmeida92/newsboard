@@ -1,0 +1,4 @@
+C:\Users\tiago.almeida\Documents\newsboard\web\NewsBoard.Model\bin\Debug\NewsBoard.Model.dll
+C:\Users\tiago.almeida\Documents\newsboard\web\NewsBoard.Model\bin\Debug\NewsBoard.Model.pdb
+C:\Users\tiago.almeida\Documents\newsboard\web\NewsBoard.Model\obj\Debug\NewsBoard.Model.dll
+C:\Users\tiago.almeida\Documents\newsboard\web\NewsBoard.Model\obj\Debug\NewsBoard.Model.pdb

@@ -1,0 +1,44 @@
+﻿@model NewsBoard.Model.NewsSource
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>
+    @Html.DisplayFor(model => model.Name)
+    <img src="@Model.FaviconUrl" />
+</h2>
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RssUrl)
+        </dt>
+
+        <dd>
+            <a href="@Model.RssUrl">@Model.RssUrl</a>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SiteUrl)
+        </dt>
+
+        <dd>
+            <a href="@Model.SiteUrl">@Model.SiteUrl</a>
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}

@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Web", "NewsBoard\NewsBoard.Web.csproj", "{5B8F4D52-7D0F-4F4D-8720-BB8DFF7D615F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Model", "NewsBoard.Model\NewsBoard.Model.csproj", "{911A3B0E-4187-4A63-ABA9-4A4B5D20A2E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Persistence", "NewsBoard.Persistence\NewsBoard.Persistence.csproj", "{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Utils", "NewsBoard.Utils\NewsBoard.Utils.csproj", "{069A350B-AC96-4E9A-8DE8-48288C556470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Scraper", "NewsBoard.Scraper\NewsBoard.Scraper.csproj", "{75828926-5E5D-4291-8F27-16AC19D1B0F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.NewsBoard", "Test.NewsBoard\Test.NewsBoard.csproj", "{147E351A-CD9B-4B77-A6F5-F8193632DBDF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1D400BB2-7954-470B-8797-8A448613EB11}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B8F4D52-7D0F-4F4D-8720-BB8DFF7D615F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B8F4D52-7D0F-4F4D-8720-BB8DFF7D615F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B8F4D52-7D0F-4F4D-8720-BB8DFF7D615F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B8F4D52-7D0F-4F4D-8720-BB8DFF7D615F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911A3B0E-4187-4A63-ABA9-4A4B5D20A2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911A3B0E-4187-4A63-ABA9-4A4B5D20A2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911A3B0E-4187-4A63-ABA9-4A4B5D20A2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911A3B0E-4187-4A63-ABA9-4A4B5D20A2E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069A350B-AC96-4E9A-8DE8-48288C556470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{069A350B-AC96-4E9A-8DE8-48288C556470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069A350B-AC96-4E9A-8DE8-48288C556470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{069A350B-AC96-4E9A-8DE8-48288C556470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75828926-5E5D-4291-8F27-16AC19D1B0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75828926-5E5D-4291-8F27-16AC19D1B0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75828926-5E5D-4291-8F27-16AC19D1B0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75828926-5E5D-4291-8F27-16AC19D1B0F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{147E351A-CD9B-4B77-A6F5-F8193632DBDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{147E351A-CD9B-4B77-A6F5-F8193632DBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{147E351A-CD9B-4B77-A6F5-F8193632DBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{147E351A-CD9B-4B77-A6F5-F8193632DBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
