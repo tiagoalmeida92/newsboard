@@ -114,6 +114,18 @@
     <None Include="Properties\webjob-publish-settings.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewsBoard.Categorizer\NewsBoard.Categorizer.csproj">
+      <Project>{D796FFCF-6514-406A-8A78-5ED58758B1EB}</Project>
+      <Name>NewsBoard.Categorizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewsBoard.Constants\NewsBoard.Constants.csproj">
+      <Project>{B9FCD1C3-00B5-4363-A7C7-EEDE9730E508}</Project>
+      <Name>NewsBoard.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewsBoard.Indexer\NewsBoard.Indexer.csproj">
+      <Project>{8BC7203A-2982-41B6-A318-3333CD85A176}</Project>
+      <Name>NewsBoard.Indexer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewsBoard.Model\NewsBoard.Model.csproj">
       <Project>{911A3B0E-4187-4A63-ABA9-4A4B5D20A2E5}</Project>
       <Name>NewsBoard.Model</Name>

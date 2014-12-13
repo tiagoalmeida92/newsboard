@@ -45,10 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Facebook">
-      <HintPath>..\packages\Facebook.6.7.0\lib\net45\Facebook.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -329,6 +325,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewsBoard.Constants\NewsBoard.Constants.csproj">
+      <Project>{b9fcd1c3-00b5-4363-a7c7-eede9730e508}</Project>
+      <Name>NewsBoard.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewsBoard.Indexer\NewsBoard.Indexer.csproj">
+      <Project>{8BC7203A-2982-41B6-A318-3333CD85A176}</Project>
+      <Name>NewsBoard.Indexer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NewsBoard.Model\NewsBoard.Model.csproj">
       <Project>{911A3B0E-4187-4A63-ABA9-4A4B5D20A2E5}</Project>
       <Name>NewsBoard.Model</Name>

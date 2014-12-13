@@ -49,28 +49,28 @@ namespace NewsBoard.Web
                 app.UseTwitterAuthentication(twitterOptions);
             }
 
-            //if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("FacebookAppId")))
-            //{
-            //    //https://www.facebook.com/dialog/oauth?client_id=686678408089891&redirect_uri=http://localhost:7720&auth_type=rerequest&scope=user_likes
-            //    var facebookOptions = new FacebookAuthenticationOptions
-            //    {
-            //        AppId = ConfigurationManager.AppSettings.Get("FacebookAppId"),
-            //        AppSecret = ConfigurationManager.AppSettings.Get("FacebookAppSecret"),
-            //        Provider = new FacebookAuthenticationProvider
-            //        {
-            //            OnAuthenticated = context =>
-            //            {
-            //                string accessToken = GetFacebookExtendedAccessToken(context.AccessToken);
-            //                context.Identity.AddClaim(new Claim(Constants.Constants.FACEBOOK_ACCESS_TOKEN_CLAIM_TYPE,
-            //                    accessToken, XmlSchemaString, "Facebook"));
-            //                return Task.FromResult(0);
-            //            }
-            //        }
-            //    };
-            //    facebookOptions.Scope.Add("email");
-            //    facebookOptions.Scope.Add("user_likes");
-            //    app.UseFacebookAuthentication(facebookOptions);
-            //}
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("FacebookAppId")))
+            {
+                ////https://www.facebook.com/dialog/oauth?client_id=686678408089891&redirect_uri=http://localhost:7720&auth_type=rerequest&scope=user_likes
+                //var facebookOptions = new FacebookAuthenticationOptions
+                //{
+                //    AppId = ConfigurationManager.AppSettings.Get("FacebookAppId"),
+                //    AppSecret = ConfigurationManager.AppSettings.Get("FacebookAppSecret"),
+                //    Provider = new FacebookAuthenticationProvider
+                //    {
+                //        OnAuthenticated = context =>
+                //        {
+                //            string accessToken = GetFacebookExtendedAccessToken(context.AccessToken);
+                //            context.Identity.AddClaim(new Claim(Constants.Constants.FACEBOOK_ACCESS_TOKEN_CLAIM_TYPE,
+                //                accessToken, XmlSchemaString, "Facebook"));
+                //            return Task.FromResult(0);
+                //        }
+                //    }
+                //};
+                //facebookOptions.Scope.Add("email");
+                //facebookOptions.Scope.Add("user_likes");
+                //app.UseFacebookAuthentication(facebookOptions);
+            }
 
 //            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("GooglePlusClientId")))
 //            {
@@ -82,27 +82,6 @@ namespace NewsBoard.Web
         ///     Extend 60 days token
         /// </summary>
         /// <param name="shortlivedtoken"></param>
-        ///// <returns></returns>
-        //private string GetFacebookExtendedAccessToken(string shortlivedtoken)
-        //{
-        //    var client = new FacebookClient();
-        //    string extendedToken = "";
-        //    try
-        //    {
-        //        dynamic result = client.Get("/oauth/access_token", new
-        //        {
-        //            grant_type = "fb_exchange_token",
-        //            client_id = ConfigurationManager.AppSettings.Get("FacebookAppId"),
-        //            client_secret = ConfigurationManager.AppSettings.Get("FacebookAppSecret"),
-        //            fb_exchange_token = shortlivedtoken
-        //        });
-        //        extendedToken = result.access_token;
-        //    }
-        //    catch
-        //    {
-        //        extendedToken = shortlivedtoken;
-        //    }
-        //    return extendedToken;
-        //}
+     
     }
 }
