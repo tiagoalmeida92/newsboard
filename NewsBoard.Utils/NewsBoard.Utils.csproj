@@ -75,8 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Files.cs" />
-    <Compile Include="HtmlArticleExtraction.cs" />
     <Compile Include="EnumerableUtils.cs" />
     <Compile Include="ODataQueryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

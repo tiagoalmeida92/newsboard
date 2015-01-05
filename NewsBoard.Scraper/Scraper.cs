@@ -5,8 +5,6 @@ using System.Net;
 using System.ServiceModel.Syndication;
 using System.Threading;
 using System.Xml;
-using NewsBoard.Categorizer;
-using NewsBoard.Indexer;
 using NewsBoard.Model;
 using NewsBoard.Persistence;
 using NewsBoard.Utils;
@@ -19,23 +17,12 @@ namespace NewsBoard.Scraper
     /// </summary>
     public class Scraper
     {
-        private readonly Categorize _categorizer;
-        private readonly IIndexer<NewsItem> _indexer;
-
-        private Scraper(IndexerDecorator<NewsItem> indexer)
-        {
-            _indexer = indexer;
-            _categorizer = new Categorize(_indexer);
-        }
-
+        
         public static void Main(string[] args)
         {
             try
             {
-                new Scraper(
-                    new WordsDecorator<NewsItem>(
-                        new SearchDecorator(
-                            new NewsIndexer()))).Run();
+                new Scraper().Run();
             }
             catch (Exception e)
             {
@@ -49,12 +36,12 @@ namespace NewsBoard.Scraper
         /// </summary>
         public void Run()
         {
-            Console.WriteLine("Scraper started.. interval = {0}s", Constants.Constants.SleepMillis/1000);
+            Console.WriteLine("Scraper started.. interval = {0}s", 5 * 60 * 60);
             for (;;)
             {
                 CrawlData data = ScrapSources();
                 Logger.Log(data);
-                Thread.Sleep(Constants.Constants.SleepMillis);
+                Thread.Sleep(5*60*60);
             }
         }
 
@@ -73,7 +60,6 @@ namespace NewsBoard.Scraper
 
                 foreach (NewsSource newsSource in newsSources)
                 {
-                    _indexer.InstantiateWriter();
                     Logger.Log(newsSource);
                     XmlReader reader = XmlReader.Create(newsSource.RssUrl);
                     SyndicationFeed feed = SyndicationFeed.Load(reader);
@@ -82,43 +68,20 @@ namespace NewsBoard.Scraper
                     {
                         String newsLink = item.Links[0].Uri.ToString();
                         if (ctx.NewsItems.Find(newsLink) != null) continue;
-                        String categoryName = Constants.Constants.DEFAULTMANUALCATEGORY;
-                        if (item.Categories.Count > 0)
-                        {
-                            categoryName = new string(item.Categories[0].Name.Where(Char.IsLetterOrDigit).ToArray());
-                            if (categoryName.Contains("Fotos") || categoryName.Contains("Vídeos")) continue;
-                        }
+                       
                         var newsItem = new NewsItem
                         {
-                            Title = HtmlArticleExtraction.RemoveHtmlTags(item.Title.Text),
-                            Description = HtmlArticleExtraction.RemoveHtmlTags(item.Summary.Text),
+                            Title = item.Title.Text,
+                            Description = item.Summary.Text,
                             Link = newsLink,
                             PubDate = item.PublishDate.DateTime,
-                            RssCategory = categoryName,
-                            CategoryName = Constants.Constants.DEFAULTMANUALCATEGORY,
                             NewsSource = newsSource
                         };
-
-                        //extract article,image,etc from news source
-                        var extractor = new HtmlArticleExtraction();
-                        extractor.Extract(newsLink);
-                        String extractedImageUri = extractor.GetImageUri();
-                        String extractedDescription = extractor.GetDescription();
-                        if (extractedImageUri == null && extractedDescription == null)
-                            continue;
-                        if (extractedImageUri != newsSource.DefaultImageUrl)
-                            newsItem.ImageLink = extractedImageUri;
-                        _indexer.SetHtmlExtractor(extractor);
-
-                        _indexer.Index(newsItem, false);
                         crawledNow++;
                         ctx.NewsItems.Add(newsItem);
                     }
-                    _indexer.WriteAndDispose();
                     ctx.SaveChanges();
                 }
-
-                _categorizer.Automatic(newsCategories);
                 return new CrawlData(ctx.NewsItems.Count(), newsSources.Count, crawledNow);
             }
         }

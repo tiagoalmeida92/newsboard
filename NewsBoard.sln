@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Web", "NewsBoard\NewsBoard.Web.csproj", "{5B8F4D52-7D0F-4F4D-8720-BB8DFF7D615F}"
 EndProject
@@ -9,13 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Model", "NewsBoar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Persistence", "NewsBoard.Persistence\NewsBoard.Persistence.csproj", "{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Indexer", "NewsBoard.Indexer\NewsBoard.Indexer.csproj", "{8BC7203A-2982-41B6-A318-3333CD85A176}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Constants", "NewsBoard.Constants\NewsBoard.Constants.csproj", "{B9FCD1C3-00B5-4363-A7C7-EEDE9730E508}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Utils", "NewsBoard.Utils\NewsBoard.Utils.csproj", "{069A350B-AC96-4E9A-8DE8-48288C556470}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Categorizer", "NewsBoard.Categorizer\NewsBoard.Categorizer.csproj", "{D796FFCF-6514-406A-8A78-5ED58758B1EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsBoard.Scraper", "NewsBoard.Scraper\NewsBoard.Scraper.csproj", "{75828926-5E5D-4291-8F27-16AC19D1B0F3}"
 EndProject
@@ -39,22 +33,10 @@ Global
 		{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BF69CA5-EA1E-4670-93B8-A78DCDBB4855}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BC7203A-2982-41B6-A318-3333CD85A176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BC7203A-2982-41B6-A318-3333CD85A176}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BC7203A-2982-41B6-A318-3333CD85A176}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BC7203A-2982-41B6-A318-3333CD85A176}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9FCD1C3-00B5-4363-A7C7-EEDE9730E508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9FCD1C3-00B5-4363-A7C7-EEDE9730E508}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9FCD1C3-00B5-4363-A7C7-EEDE9730E508}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9FCD1C3-00B5-4363-A7C7-EEDE9730E508}.Release|Any CPU.Build.0 = Release|Any CPU
 		{069A350B-AC96-4E9A-8DE8-48288C556470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{069A350B-AC96-4E9A-8DE8-48288C556470}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{069A350B-AC96-4E9A-8DE8-48288C556470}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{069A350B-AC96-4E9A-8DE8-48288C556470}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D796FFCF-6514-406A-8A78-5ED58758B1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D796FFCF-6514-406A-8A78-5ED58758B1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D796FFCF-6514-406A-8A78-5ED58758B1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D796FFCF-6514-406A-8A78-5ED58758B1EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75828926-5E5D-4291-8F27-16AC19D1B0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75828926-5E5D-4291-8F27-16AC19D1B0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75828926-5E5D-4291-8F27-16AC19D1B0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
