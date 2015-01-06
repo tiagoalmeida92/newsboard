@@ -1,0 +1,12 @@
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\NewsBoard.Utils.dll.config
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\NewsBoard.Utils.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\NewsBoard.Utils.pdb
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\dotNetRDF.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\Microsoft.Threading.Tasks.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\dotNetRDF.xml
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\Microsoft.Threading.Tasks.xml
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\obj\Release\NewsBoard.Utils.csprojResolveAssemblyReference.cache
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\obj\Release\NewsBoard.Utils.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\obj\Release\NewsBoard.Utils.pdb

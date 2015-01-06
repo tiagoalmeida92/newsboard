@@ -56,3 +56,10 @@ C:\Users\tiago.almeida\Documents\code\newboard\NewsBoard.Utils\bin\Debug\System.
 C:\Users\tiago.almeida\Documents\code\newboard\NewsBoard.Utils\obj\Debug\NewsBoard.Utils.csprojResolveAssemblyReference.cache
 C:\Users\tiago.almeida\Documents\code\newboard\NewsBoard.Utils\obj\Debug\NewsBoard.Utils.dll
 C:\Users\tiago.almeida\Documents\code\newboard\NewsBoard.Utils\obj\Debug\NewsBoard.Utils.pdb
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Debug\NewsBoard.Utils.dll.config
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Debug\NewsBoard.Utils.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Debug\NewsBoard.Utils.pdb
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Debug\dotNetRDF.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\bin\Debug\dotNetRDF.xml
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\obj\Debug\NewsBoard.Utils.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Utils\obj\Debug\NewsBoard.Utils.pdb

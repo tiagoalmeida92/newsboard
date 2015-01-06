@@ -1,0 +1,52 @@
+﻿@using NewsBoard.Model
+@model IEnumerable<NewsBoard.Model.NewsSource>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FaviconUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RssUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SiteUrl)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (NewsSource item in Model)
+    {
+        <tr>
+            <td>
+                <img width="20" height="20" src="@item.FaviconUrl" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a href="@item.RssUrl">@item.RssUrl</a>
+            </td>
+            <td>
+                <a href="@item.SiteUrl">@item.SiteUrl</a>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            </td>
+        </tr>
+    }
+</table>

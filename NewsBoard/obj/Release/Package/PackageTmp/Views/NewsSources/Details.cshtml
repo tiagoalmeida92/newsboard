@@ -1,0 +1,38 @@
+﻿@model NewsBoard.Model.NewsSource
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>
+    @Html.DisplayFor(model => model.Name)
+    <img src="@Model.FaviconUrl" />
+</h2>
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RssUrl)
+        </dt>
+
+        <dd>
+            <a href="@Model.RssUrl">@Model.RssUrl</a>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SiteUrl)
+        </dt>
+
+        <dd>
+            <a href="@Model.SiteUrl">@Model.SiteUrl</a>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

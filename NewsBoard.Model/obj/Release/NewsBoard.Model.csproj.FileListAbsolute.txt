@@ -1,0 +1,5 @@
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Model\bin\Release\NewsBoard.Model.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Model\bin\Release\NewsBoard.Model.pdb
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Model\obj\Release\NewsBoard.Model.csprojResolveAssemblyReference.cache
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Model\obj\Release\NewsBoard.Model.dll
+C:\Users\Tiago\Documents\source\newsboard\NewsBoard.Model\obj\Release\NewsBoard.Model.pdb

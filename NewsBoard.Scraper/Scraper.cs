@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.ServiceModel.Syndication;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 using NewsBoard.Model;
 using NewsBoard.Persistence;
 using NewsBoard.Utils;
+using ReadSharp;
 
 namespace NewsBoard.Scraper
 {
@@ -17,6 +20,8 @@ namespace NewsBoard.Scraper
     /// </summary>
     public class Scraper
     {
+
+        private const int SLEEP_INTERVAL = 5*60*60*1000;
         
         public static void Main(string[] args)
         {
@@ -36,12 +41,12 @@ namespace NewsBoard.Scraper
         /// </summary>
         public void Run()
         {
-            Console.WriteLine("Scraper started.. interval = {0}s", 5 * 60 * 60);
+            Console.WriteLine("Scraper started.. interval = {0}s", SLEEP_INTERVAL);
             for (;;)
             {
                 CrawlData data = ScrapSources();
                 Logger.Log(data);
-                Thread.Sleep(5*60*60);
+                Thread.Sleep(SLEEP_INTERVAL);
             }
         }
 
@@ -55,7 +60,6 @@ namespace NewsBoard.Scraper
             int crawledNow = 0;
             using (var ctx = new NewsDb())
             {
-                IList<NewsCategory> newsCategories = ctx.NewsCategories.ToList();
                 IList<NewsSource> newsSources = ctx.NewsSources.ToList();
 
                 foreach (NewsSource newsSource in newsSources)
@@ -68,15 +72,8 @@ namespace NewsBoard.Scraper
                     {
                         String newsLink = item.Links[0].Uri.ToString();
                         if (ctx.NewsItems.Find(newsLink) != null) continue;
-                       
-                        var newsItem = new NewsItem
-                        {
-                            Title = item.Title.Text,
-                            Description = item.Summary.Text,
-                            Link = newsLink,
-                            PubDate = item.PublishDate.DateTime,
-                            NewsSource = newsSource
-                        };
+                        var newsItem = RssToNewsItem(item);
+                        newsItem.NewsSource = newsSource;
                         crawledNow++;
                         ctx.NewsItems.Add(newsItem);
                     }
@@ -84,6 +81,29 @@ namespace NewsBoard.Scraper
                 }
                 return new CrawlData(ctx.NewsItems.Count(), newsSources.Count, crawledNow);
             }
+        }
+
+        private NewsItem RssToNewsItem(SyndicationItem item)
+        {
+
+            String newsLink = item.Links[0].Uri.ToString();
+            String imageUri = GetImage(newsLink);
+            NewsItem newsItem = new NewsItem
+            {
+                Title = Regex.Replace(item.Title.Text, @"<[^>]*>", String.Empty),
+                Description = Regex.Replace(item.Summary.Text, @"<[^>]*>", String.Empty),
+                Link = newsLink,
+                PubDate = item.PublishDate.DateTime,
+                ImageLink = imageUri
+            };
+            return newsItem;
+        }
+
+        static String GetImage(String articleLink)
+        {
+            Reader reader = new Reader();
+            Article a = reader.Read(new Uri(articleLink)).Result;
+            return a.FrontImage.ToString();
         }
     }
 }

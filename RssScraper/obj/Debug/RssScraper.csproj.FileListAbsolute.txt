@@ -1,0 +1,16 @@
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\RssScraper.exe.config
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\RssScraper.exe
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\RssScraper.pdb
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\EntityFramework.dll
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\NewsBoard.Model.dll
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\NewsBoard.Persistence.dll
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\NewsBoard.Utils.dll
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\NewsBoard.Model.pdb
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\NewsBoard.Persistence.pdb
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\NewsBoard.Utils.pdb
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\EntityFramework.xml
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\obj\Debug\RssScraper.csprojResolveAssemblyReference.cache
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\obj\Debug\RssScraper.exe
+C:\Users\Tiago\Documents\source\newsboard\RssScraper\obj\Debug\RssScraper.pdb
